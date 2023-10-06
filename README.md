@@ -1,24 +1,38 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# <!--ここにアプリ名を入力-->
+​sign_language_haken
 
-Things you may want to cover:
+## サイト概要
+### サイトテーマ
+<!--何を『目的』とし、どのような『分類』なのかを簡潔に書く-->
+聴覚しょうがい者が気軽に手話通訳士を派遣することが出来るサイト
+​
+### テーマを選んだ理由
+<!--なぜこのようなテーマにしたかを説明する-->
+特にテーマが思いつかず知人に聴覚しょうがい者がいたのでこんなサイトが有ればいいなと思いついたのと、
+ecサイトで学んだことを復習することが出来ると思ったからです。
+​
+### ターゲットユーザ
+<!--誰に使ってもらうかを具体的に記載する-->
+聴覚しょうがい者
+​
+### 主な利用シーン
+<!--どのような時に使うのかの状況を記載すること-->
+病院を受信する際や買い物に行きたいときなど​通訳者がいてくれたらいいなと思ったらいつでも
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 設計書
+<!--テーマを設定・提出する時点では不要です-->
+​
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+​
+## 使用素材
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+折りたたむ
