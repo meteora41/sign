@@ -1,0 +1,19 @@
+eeee
+
+<%= form_with model: @person, url: users_person_path do |f| %>
+
+  ハンドルネーム
+  <%= f.text_field :handle %>
+
+  性別
+  <%= f.text_field :gender %>
+
+  年齢
+  <%= f.text_field :age %>
+
+  連絡先
+  <%= f.text_field :contact %>
+
+  <%= f.submit "保存" %>
+
+<% end %>

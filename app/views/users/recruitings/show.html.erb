@@ -1,0 +1,33 @@
+  <div class="container">
+
+    <div class= "ml-5 pl-5 my-2"><%= @recruiting.person.handle %>さん</div>
+
+    <div class= "mt-5 ml-3">タイトル : </div>
+    <div class= "ml-5 pl-5 my-2"><%= @recruiting.title %></div>
+
+    <div class= "ml-3">コメント : </div>
+    <div class= "ml-5 pl-5 my-2"><%= @recruiting.comment %></div>
+
+    <div class= "ml-3">希望時間 : </div>
+    <div class= "ml-5 pl-5 my-2"><%= @recruiting.datetime %></div>
+
+    <div class= "ml-3">集合場所 : </div>
+    <div class= "ml-5 pl-5 my-2"><%= @recruiting.place %></div>
+
+    <div class= "btn-toolbar ml-5 pl-5 mt-4">
+        <%= button_to "編集", edit_users_recruiting_path(@recruiting.id), class: "btn btn-success mr-5", method: :get %>
+        <%= button_to "削除", users_recruiting_path(@recruiting.id), class: "btn btn-danger ml-5", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    </div>
+
+    <div>コメント</div>
+
+
+    <% @talks.each do |talk| %>
+      <%= talk.conversation %>
+    <% end %>
+
+    <%= form_with model: [@recruiting, @talk], url: users_recruitings_path(@recruiting.id) do |f| %>
+      <div><%= f.text_field :conversation %></div>
+      <%= f.submit '送信' %>
+    <% end %>
+  </div>

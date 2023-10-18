@@ -1,0 +1,2 @@
+module Users::TalksHelper
+end

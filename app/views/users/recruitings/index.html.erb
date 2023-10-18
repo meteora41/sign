@@ -1,0 +1,73 @@
+  <body>
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-3">
+          <h3 class="ml-3">新規投稿</h3>
+          <%= form_with model: @recruiting, url: users_recruitings_path do |f| %>
+
+          <div class= "ml-2 mt-3">
+            <div>タイトル : <%= f.text_field :title %></div>
+          </div>
+
+          <div class= "m-2">
+            <div>コメント : <%= f.text_area :comment %></div>
+          </div>
+
+          <div class= "ml-2">
+            <div>希望時間 : <%= f.text_field :datetime %></div>
+          </div>
+
+          <div class= "m-2">
+            <div>集合場所 : <%= f.text_field :place %></div>
+          </div>
+
+          <div class= "ml-2 mt-3">
+            <%= f.submit '投稿' %>
+          </div>
+
+          <div class= " mt-4">
+            <%= link_to "マイページを未作成の方はこちら", new_users_person_path %>
+          </div>
+
+          <% end %>
+        </div>
+
+        <div class="col-9">
+          <h3 class="mb-5 text-center">通訳士の募集 一覧</h3>
+          <table class="table text-center">
+            <thead>
+              <tr>
+                <th>　　　タイトル　　　</th>
+                <th>　希望時間</th>
+                <th>集合場所　</th>
+                <th>投稿者　</th>
+                <th> </th>
+              </tr>
+            </thead>
+
+            <% @recruitings.each do |recruiting| %>
+            <tbody>
+              <tr>
+                <td>
+                  <%= link_to recruiting.title, "/users/recruitings/#{recruiting.id}" %>
+                </td>
+                <td>
+                  <%= recruiting.datetime %>
+                </td>
+                <td>
+                  <%= recruiting.place %>
+                </td>
+                <td>
+                  <%= recruiting.person.handle %>さん
+                </td>
+                <td>
+                  ♥
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>

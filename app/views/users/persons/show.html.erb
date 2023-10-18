@@ -1,0 +1,21 @@
+
+\\\\\\
+    <diV><%= @person.user.name %>さんのマイページ</diV>
+
+     <diV>ハンドルネーム
+      <%= @person.handle %></diV>
+
+      <diV>性別
+      <%= @person.gender %></diV>
+
+      <diV>年齢
+      <%= @person.age %></diV>
+
+      <diV>連絡先
+      <%= @person.contact %></diV>
+
+
+
+
+
+  <%= link_to "編集", edit_users_person_path %>
