@@ -23,10 +23,15 @@
 
 
     <% @talks.each do |talk| %>
-      <%= talk.conversation %>
+      <div>
+        <%= talk.person.handle %>さんのコメント : <%= talk.conversation %>
+        <% if talk.person_id == current_user.id %>
+          <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete %>
+        <% end %>
+      </div>
     <% end %>
 
-    <%= form_with model: [@recruiting, @talk], url: users_recruitings_path(@recruiting.id) do |f| %>
+    <%= form_with model: [@recruiting, @talk], url: users_recruiting_talks_path(@recruiting.id) do |f| %>
       <div><%= f.text_field :conversation %></div>
       <%= f.submit '送信' %>
     <% end %>

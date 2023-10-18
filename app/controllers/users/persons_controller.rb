@@ -33,7 +33,7 @@ class Users::PersonsController < ApplicationController
     person.update(person_params)
     redirect_to users_person_path(current_user.id)
   end
-
+  
   private
 
   def person_params

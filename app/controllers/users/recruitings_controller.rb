@@ -1,6 +1,6 @@
 class Users::RecruitingsController < ApplicationController
   
-   before_action :authenticate_user!, only: [:edit, :update, :destroy, :create]
+   before_action :authenticate_user!, only: [:index, :edit, :update, :destroy, :create]
 
   def index
     @recruiting = Recruiting.new
@@ -35,6 +35,11 @@ class Users::RecruitingsController < ApplicationController
     recruiting.destroy
     redirect_to users_recruitings_path
   end
+  
+  def owner
+    @recruiting = Recruiting.find(params[:id])
+  end
+
 
   private
 
