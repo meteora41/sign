@@ -27,12 +27,38 @@
 
       <div class= "mt-4 ml-3 mb-4">ーコメント欄ー</div>
 
+      
       <% @talks.each do |talk| %>
         <div class= "mt-2 mb-2">
-          <%=link_to talk.person.handle,  "/users/recruitings/#{talk.person_id}/owner/#{talk.person_id}" %>さんのコメント : <%= talk.conversation %>
+        <% if talk.person_id == @recruiting.person_id %>
+       
           <% if talk.person_id == current_user.id %>
-            <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete %>
+          <!--投稿主とコメント者が同じ、かつ、コメント者がログインユーザーの場合-->
+            <div style= "color: green;">自分のコメント : <%= talk.conversation %>
+            <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete %></div>
+            
+          <% else %>
+          <!--投稿主とコメント者が同じ、かつ、コメント者がログインユーザーと別の場合-->
+            <div style= "color: red;">
+              投稿者さんのコメント : <%= talk.conversation %>
+            </div>
           <% end %>
+          
+        <% else %>
+        
+          <% if talk.person_id == current_user.id %>
+          <!--投稿主とコメント者が別、かつ、コメント者がログインユーザーの場合-->
+            <div style= "color: green;">自分のコメント : <%= talk.conversation %>
+            <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete %></div>
+            
+          <% else %>
+          <!--投稿主とコメント者が別、かつ、コメント者がログインユーザーと別の場合-->
+            <div style= "color: blue;">
+              <%=link_to talk.person.handle,  "/users/recruitings/#{talk.person_id}/owner/#{talk.person_id}" %>さんのコメント : <%= talk.conversation %>
+            </div>
+          <% end %>
+          
+        <% end %>
         </div>
       <% end %>
 
@@ -42,3 +68,5 @@
       <% end %>
     <% end %>
   </div>
+  
+  
