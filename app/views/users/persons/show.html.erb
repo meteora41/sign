@@ -1,21 +1,47 @@
-
-\\\\\\
-    <diV><%= @person.user.name %>さんのマイページ</diV>
-
-     <diV>ハンドルネーム
-      <%= @person.handle %></diV>
-
-      <diV>性別
-      <%= @person.gender %></diV>
-
-      <diV>年齢
-      <%= @person.age %></diV>
-
-      <diV>連絡先
-      <%= @person.contact %></diV>
-
-
-
-
-
-  <%= link_to "編集", edit_users_person_path %>
+  <div class="container">
+    <h3 class="ml-5 mt-5 mb-5"> <%= @person.user.name %> さんのマイページ</h3>
+    
+    <table width="40%">
+      <tr align="right">
+        <th style="font-size:20px; color:;" width="50%">
+          ハンドルネーム : 
+        </th>
+        <td style="font-size:20px; color:red;" width= "50%">
+          <%= @person.handle %>
+        </td>
+      </tr>
+      
+      <tr align="right">
+        <th style="font-size:20px; color:;" width="50%">
+          性別 : 
+        </th>
+        <td style="font-size:20px; color:red;" width="50%">
+          <%= @person.gender %>
+        </td>
+      </tr>
+      
+      <tr align="right">
+        <th style="font-size:20px; color:;" width="50%">
+          年齢 :
+        </th>
+        <td style="font-size:20px; color:red;" width="50%">
+          <%= @person.age %>
+        </td>
+      </tr>
+      
+      <tr align="right">
+        <th style="font-size:20px; color:;" width="50%">
+          連絡先 : 
+        </th>
+        <td style="font-size:20px; color:red;" width="50%">
+          <%= @person.contact %>
+        </td>
+      </tr>
+      
+    </table>
+    
+    <div class="text-center mt-4">
+    <%= link_to "編集", edit_users_person_path %>
+    </div>
+  </div>
+  

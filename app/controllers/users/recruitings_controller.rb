@@ -1,6 +1,6 @@
 class Users::RecruitingsController < ApplicationController
   
-   before_action :authenticate_user!, only: [:index, :edit, :update, :destroy, :create]
+   before_action :authenticate_user!, only: [ :edit, :update, :destroy, :create, :owner]
 
   def index
     @recruiting = Recruiting.new

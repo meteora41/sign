@@ -1,38 +1,44 @@
   <div class="container">
 
-    <div class= "ml-5 pl-5 my-2"><%= @recruiting.person.handle %>さん</div>
-
-    <div class= "mt-5 ml-3">タイトル : </div>
-    <div class= "ml-5 pl-5 my-2"><%= @recruiting.title %></div>
-
-    <div class= "ml-3">コメント : </div>
-    <div class= "ml-5 pl-5 my-2"><%= @recruiting.comment %></div>
-
-    <div class= "ml-3">希望時間 : </div>
-    <div class= "ml-5 pl-5 my-2"><%= @recruiting.datetime %></div>
-
-    <div class= "ml-3">集合場所 : </div>
-    <div class= "ml-5 pl-5 my-2"><%= @recruiting.place %></div>
-
-    <div class= "btn-toolbar ml-5 pl-5 mt-4">
-        <%= button_to "編集", edit_users_recruiting_path(@recruiting.id), class: "btn btn-success mr-5", method: :get %>
-        <%= button_to "削除", users_recruiting_path(@recruiting.id), class: "btn btn-danger ml-5", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <div class= "ml-5 pl-5 my-2 mt-4">
+      <h4><%=link_to @recruiting.person.handle, "/users/recruitings/#{@recruiting.id}/owner/#{@recruiting.id}" %> さんの投稿</h4>
     </div>
 
-    <div>コメント</div>
+    <div class= "mt-4 ml-3" style= "color: red;">タイトル : </div>
+    <div class= "ml-5 pl-5 my-2"><%= @recruiting.title %></div>
 
+    <div class= "ml-3" style= "color: red;">コメント : </div>
+    <div class= "ml-5 pl-5 my-2"><%= @recruiting.comment %></div>
 
-    <% @talks.each do |talk| %>
-      <div>
-        <%= talk.person.handle %>さんのコメント : <%= talk.conversation %>
-        <% if talk.person_id == current_user.id %>
-          <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete %>
+    <div class= "ml-3" style= "color: red;">希望時間 : </div>
+    <div class= "ml-5 pl-5 my-2"><%= @recruiting.datetime %></div>
+
+    <div class= "ml-3" style= "color: red;">集合場所 : </div>
+    <div class= "ml-5 pl-5 my-2"><%= @recruiting.place %></div>
+    
+    <% if user_signed_in? %>
+      <div class= "btn-toolbar ml-5 pl-5 mt-4">
+        <% if @recruiting.person_id == current_user.id %>
+          <%= button_to "編集", edit_users_recruiting_path(@recruiting.id), class: "btn btn-success mr-5", method: :get %>
+          <%= button_to "削除", users_recruiting_path(@recruiting.id), class: "btn btn-danger ml-5", method: :delete, "data-confirm" => "本当に削除しますか？" %>
         <% end %>
       </div>
-    <% end %>
 
-    <%= form_with model: [@recruiting, @talk], url: users_recruiting_talks_path(@recruiting.id) do |f| %>
-      <div><%= f.text_field :conversation %></div>
-      <%= f.submit '送信' %>
+
+      <div class= "mt-4 ml-3 mb-4">ーコメント欄ー</div>
+
+      <% @talks.each do |talk| %>
+        <div class= "mt-2 mb-2">
+          <%=link_to talk.person.handle,  "/users/recruitings/#{talk.person_id}/owner/#{talk.person_id}" %>さんのコメント : <%= talk.conversation %>
+          <% if talk.person_id == current_user.id %>
+            <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= form_with model: [@recruiting, @talk], url: users_recruiting_talks_path(@recruiting.id) do |f| %>
+        <div><%= f.text_field :conversation %></div>
+        <%= f.submit '送信' %>
+      <% end %>
     <% end %>
   </div>

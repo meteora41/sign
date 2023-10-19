@@ -15,7 +15,6 @@ class Users::PersonsController < ApplicationController
       @person.user_id = current_user.id
       @person.save
       redirect_to users_person_path(current_user.id)
-
   end
 
 
