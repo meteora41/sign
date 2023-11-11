@@ -12,10 +12,14 @@ Rails.application.routes.draw do
   root 'users/recruitings#index'
 
   namespace :users do 
-    resources :persons
+    resources :persons do
+      member do
+        get :favorites
+      end
+    end
     resources :recruitings do
       get 'owner/:id' => 'recruitings#owner'
-      resource :favorites, only: [:create, :destroy]
+       resource :favorites, only: [:create, :destroy]
       resources :talks, only: [:create, :destroy]
     end
 

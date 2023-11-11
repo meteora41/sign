@@ -10,4 +10,9 @@ class Recruiting < ApplicationRecord
     favorites.exists?(person_id: user.id)
   end
   
+  validates :title, presence: true
+  
+  
 end
+
+#`validates :title, :datetime, :place, presence: true`

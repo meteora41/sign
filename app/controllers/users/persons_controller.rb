@@ -14,7 +14,7 @@ class Users::PersonsController < ApplicationController
       @person = Person.new(person_params)
       @person.user_id = current_user.id
       @person.save
-      redirect_to users_person_path(current_user.id)
+        redirect_to users_person_path(current_user.id)
   end
 
 
@@ -29,8 +29,18 @@ class Users::PersonsController < ApplicationController
   
   def update
     person = Person.find(params[:id])
-    person.update(person_params)
-    redirect_to users_person_path(current_user.id)
+    if person.update(person_params)
+      redirect_to users_person_path(current_user.id)
+    else
+      @person = Person.find(params[:id])
+      render :edit
+    end
+  end
+  
+  def favorites
+    @person = Person.find(params[:id])
+    favorites= Favorite.where(person_id: current_user.id).pluck(:recruiting_id)
+    @favorite_posts = Recruiting.find(favorites)
   end
   
   private

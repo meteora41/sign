@@ -3,16 +3,16 @@
 <%= form_with model: @person, url: users_persons_path do |f| %>
 
   ハンドルネーム
-  <%= f.text_field :handle %>
+  <%= f.text_field :handle, placeholder: "" %>
 
   性別
-  <%= f.text_field :gender %>
+  <%= f.text_field :gender , placeholder: "男性、女性、その他など"%>
 
   年齢
-  <%= f.text_field :age %>
+  <%= f.text_field :age, placeholder: "OO歳" %>
 
   連絡先
-  <%= f.text_field :contact %>
+  <%= f.text_field :contact, placeholder: "" %>
 
   <%= f.submit "保存" %>
 

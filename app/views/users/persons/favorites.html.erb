@@ -1,0 +1,52 @@
+  <div class="container">
+          <h3 class="mt-5 mb-5 text-center">お気に入り</h3>
+          <table class="table text-center">
+            <thead>
+              <tr>
+                <th>　　　タイトル　　　</th>
+                <th>　希望時間</th>
+                <th>集合場所　</th>
+                <th>投稿者　</th>
+                <% if user_signed_in? %>
+                  <th>お気に入り</th>
+                <% end %>
+              </tr>
+            </thead>
+
+            <% @favorite_posts.each do |recruiting|%>
+            <tbody>
+              <tr>
+                <td>
+                  <%= link_to recruiting.title, "/users/recruitings/#{recruiting.id}" %>
+                </td>
+                <td>
+                  <%= recruiting.datetime %>
+                </td>
+                <td>
+                  <%= recruiting.place %>
+                </td>
+                <td>
+                  <%= link_to recruiting.person.handle, "/users/recruitings/#{recruiting.id}/owner/#{recruiting.id}" %>
+                </td>
+
+                <% if user_signed_in? %>
+                  <td>
+                    <% if recruiting.favorited_by?(current_user) %>
+                      <%= link_to users_recruiting_favorites_path(recruiting), method: :delete do %>
+                        ♥
+                    <% end %>
+                 
+                    <% else %>
+                      <%= link_to users_recruiting_favorites_path(recruiting), method: :post do %>
+                        ♡
+                      <% end %>
+                    <% end %>
+                  </td>
+                <% end %>
+               
+
+              </tr>
+            </tbody>
+          <% end %>
+          </table>
+  </div>

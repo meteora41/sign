@@ -1,6 +1,16 @@
 
   <div class="container">
     <h3 class="ml-5 mt-5 mb-5"> <%= @person.user.name %> さんのマイページ編集</h3>
+    
+    <% if @person.errors.any? %>
+      <div class="ml-5 mt-3" style= "color: red;">
+        <% @person.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      </div>
+      <div style= "color: red;">＊ハンドルネームを入力してください＊</div>
+    <% end %>
+    
     <%= form_with model: @person, url: users_person_path do |f| %>
 
     <table width="40%" class="ml-3">
@@ -41,7 +51,7 @@
       </tr>
 
     </table>
-    <div class="text-center mt-1">
+    <div class="text-center mt-1 mr-5 pr-5">
       <%= f.submit "保存" %>
     </div>
     <% end %>

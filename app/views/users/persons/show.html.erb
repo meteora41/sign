@@ -40,8 +40,37 @@
       
     </table>
     
-    <div class="text-center mt-4">
-    <%= link_to "編集", edit_users_person_path %>
+    <div class="text-center mt-1 mr-5 pr-5">
+      <%= button_to "編集", edit_users_person_path, class: "btn btn-success mr-5", method: :get %>
     </div>
-  </div>
+
   
+
+    <h4 class="ml-5 mt-5 mb-5">投稿 一覧</h4>
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th>　　　タイトル　　　</th>
+          <th>　希望時間</th>
+          <th>集合場所　</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+      <% @person.recruitings.each do |recruiting| %>
+        <tr>
+          <td>
+            <%= link_to recruiting.title, "/users/recruitings/#{recruiting.id}" %>
+          </td>
+          <td>
+            <%= recruiting.datetime %>
+          </td>
+          <td>
+            <%= recruiting.place %>
+          </td>
+        </tr>
+      </tbody>
+    <%end %>
+    </table>
+
+  </div>

@@ -1,13 +1,13 @@
 class Users::TalksController < ApplicationController
 
   def create
-    recruiting = Recruiting.find(params[:recruiting_id])
-    talk = Talk.new(talk_params)
-    talk.person_id = current_user.id
+    @recruiting = Recruiting.find(params[:recruiting_id])
+    @talk = Talk.new(talk_params)
+    @talk.person_id = current_user.id
 
-    talk.recruiting_id = recruiting.id
-    talk.save
-    redirect_to users_recruiting_path(recruiting)
+    @talk.recruiting_id = @recruiting.id
+    @talk.save
+    redirect_to users_recruiting_path(@recruiting)
   end
 
   def destroy
