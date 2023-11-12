@@ -11,6 +11,7 @@ class Users::RecruitingsController < ApplicationController
     @recruiting = Recruiting.new(recruiting_params)
         @recruiting.person_id = current_user.id
         if @recruiting.save
+          flash[:success] = "投稿が完了しました。"
           redirect_to users_recruiting_path(@recruiting.id)
         else
           @recruitings = Recruiting.all
@@ -29,8 +30,14 @@ class Users::RecruitingsController < ApplicationController
 
   def update
     recruiting = Recruiting.find(params[:id])
-    recruiting.update(recruiting_params)
-    redirect_to users_recruiting_path(recruiting.id)
+    if recruiting.update(recruiting_params)
+      flash[:complete] = "編集が完了しました。"
+      redirect_to users_recruiting_path(recruiting.id)
+    else
+      flash.now[:alert] = "＊ タイトル または 希望日時 を正しく入力してください＊"
+      @recruiting = Recruiting.find(params[:id])
+      render :edit
+    end
   end
 
   def destroy

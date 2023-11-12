@@ -1,25 +1,31 @@
   <div class="container">
-    <h3 class="ml-5 mt-5 mb-5"> <%= @person.user.name %> さんのマイページ</h3>
-    
+
+    <div class="ml-5 mt-4 " style= "color: lightgreen;">
+      <%= flash[:notice] %>
+    </div>
+
+    <h3 class="ml-5 mt-5 mb-5 d-flex justify-content-center"> <%= @person.user.name %> さんのマイページ</h3>
+
+    <div class= "mr-5 d-flex justify-content-center">
     <table width="40%">
       <tr align="right">
         <th style="font-size:20px; color:;" width="50%">
-          ハンドルネーム : 
+          ハンドルネーム :
         </th>
         <td style="font-size:20px; color:red;" width= "50%">
           <%= @person.handle %>
         </td>
       </tr>
-      
+
       <tr align="right">
         <th style="font-size:20px; color:;" width="50%">
-          性別 : 
+          性別 :
         </th>
         <td style="font-size:20px; color:red;" width="50%">
           <%= @person.gender %>
         </td>
       </tr>
-      
+
       <tr align="right">
         <th style="font-size:20px; color:;" width="50%">
           年齢 :
@@ -28,25 +34,25 @@
           <%= @person.age %>
         </td>
       </tr>
-      
+
       <tr align="right">
         <th style="font-size:20px; color:;" width="50%">
-          連絡先 : 
+          連絡先 :
         </th>
         <td style="font-size:20px; color:red;" width="50%">
           <%= @person.contact %>
         </td>
       </tr>
-      
+
     </table>
-    
-    <div class="text-center mt-1 mr-5 pr-5">
+    </div>
+    <div class= " ml-5 mt-4 pl-5 d-flex justify-content-center">
       <%= button_to "編集", edit_users_person_path, class: "btn btn-success mr-5", method: :get %>
     </div>
 
-  
 
-    <h4 class="ml-5 mt-5 mb-5">投稿 一覧</h4>
+
+    <h4 class="ml-5 mt-4 mb-5 pl-5">投稿 一覧</h4>
     <table class="table text-center">
       <thead>
         <tr>
@@ -55,7 +61,7 @@
           <th>集合場所　</th>
         </tr>
       </thead>
-  
+
       <tbody>
       <% @person.recruitings.each do |recruiting| %>
         <tr>

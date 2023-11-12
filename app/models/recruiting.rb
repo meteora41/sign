@@ -11,6 +11,7 @@ class Recruiting < ApplicationRecord
   end
   
   validates :title, presence: true
+  validates :datetime, presence: true, format: { with: /\A\d{2}-\d{2}/ } 
   
   
 end

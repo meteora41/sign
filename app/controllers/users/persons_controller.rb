@@ -30,8 +30,10 @@ class Users::PersonsController < ApplicationController
   def update
     person = Person.find(params[:id])
     if person.update(person_params)
+      flash[:notice] = "編集が完了しました。"
       redirect_to users_person_path(current_user.id)
     else
+      flash.now[:alert] = "＊ハンドルネームを入力してください＊"
       @person = Person.find(params[:id])
       render :edit
     end

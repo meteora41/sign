@@ -1,57 +1,54 @@
 
   <div class="container">
-    <h3 class="ml-5 mt-5 mb-5"> <%= @person.user.name %> さんのマイページ編集</h3>
-    
-    <% if @person.errors.any? %>
-      <div class="ml-5 mt-3" style= "color: red;">
-        <% @person.errors.full_messages.each do |message| %>
-          <%= message %>
-        <% end %>
-      </div>
-      <div style= "color: red;">＊ハンドルネームを入力してください＊</div>
-    <% end %>
-    
+    <h3 class="ml-5 mt-5 mb-4 d-flex justify-content-center"> <%= @person.user.name %> さんのマイページ編集</h3>
+
+    <div class="ml-5 mb-2 d-flex justify-content-center" style= "color: red;">
+      <%= flash[:alert] %>
+    </div>
+
     <%= form_with model: @person, url: users_person_path do |f| %>
 
-    <table width="40%" class="ml-3">
-      <tr align="right">
-        <th style="font-size:20px; color:;" width="50%">
-          ハンドルネーム :
-        </th>
-        <td style="font-size:20px; color:red;" width= "50%">
-          <%= f.text_field :handle %>
-        </td>
-      </tr>
+    <div class= "mr-5 mb-5 d-flex justify-content-center">
+      <table width="40%" class="ml-3 mt-4">
+        <tr align="right">
+          <th style="font-size:20px; color:;" width="50%">
+            ハンドルネーム :
+          </th>
+          <td style="font-size:20px; color:red;" width= "50%">
+            <%= f.text_field :handle %>
+          </td>
+        </tr>
 
-      <tr align="right">
-        <th style="font-size:20px; color:;" width="50%">
-          性別 :
-        </th>
-        <td style="font-size:20px; color:red;" width="50%">
-          <%= f.text_field :gender %>
-        </td>
-      </tr>
+        <tr align="right">
+          <th style="font-size:20px; color:;" width="50%">
+            性別 :
+          </th>
+          <td style="font-size:20px; color:red;" width="50%">
+            <%= f.text_field :gender %>
+          </td>
+        </tr>
 
-      <tr align="right">
-        <th style="font-size:20px; color:;" width="50%">
-          年齢 :
-        </th>
-        <td style="font-size:20px; color:red;" width="50%">
-          <%= f.text_field :age %>
-        </td>
-      </tr>
+        <tr align="right">
+          <th style="font-size:20px; color:;" width="50%">
+            年齢 :
+          </th>
+          <td style="font-size:20px; color:red;" width="50%">
+            <%= f.text_field :age %>
+          </td>
+        </tr>
 
-      <tr align="right">
-        <th style="font-size:20px; color:;" width="50%">
-          連絡先 :
-        </th>
-        <td style="font-size:20px; color:red;" width="50%">
-          <%= f.text_field :contact %>
-        </td>
-      </tr>
-
-    </table>
-    <div class="text-center mt-1 mr-5 pr-5">
+        <tr align="right">
+          <th style="font-size:20px; color:;" width="50%">
+            連絡先 :
+          </th>
+          <td style="font-size:20px; color:red;" width="50%">
+            <%= f.text_field :contact %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  
+    <div class= " ml-5 mt-4 d-flex justify-content-center">
       <%= f.submit "保存" %>
     </div>
     <% end %>
