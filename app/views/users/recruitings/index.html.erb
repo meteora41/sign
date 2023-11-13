@@ -1,6 +1,4 @@
   <body>
-
-
     <div class="container">
       <div class="ml-4 mt-4 " style= "color: lightgreen;">
       <%= flash[:notice] %>
@@ -31,13 +29,9 @@
             <div>集合場所 : <%= f.text_field :place, placeholder: "例)oo県/oo市/oo駅前" %></div>
           </div>
 
-
-
-
           <div class= "mr-5 mt-3 d-flex justify-content-center">
             <%= f.submit '投稿' %>
           </div>
-
 
           <div class= "mr-2 mt-3 mb-2 bg- text-danger">
             <h5>＊注意＊</h5>
@@ -47,19 +41,27 @@
           <div class= "mr-2 mt-3 mb-5 bg- text-info" >
             <h6>＊集合場所やタイトルに県や市　</br>　を入力することで検索にヒッ　</br>　トし閲覧されやすくなります＊</h6>
           </div>
-          <!--div class= " mt-4">
-            <%= link_to "マイページを未作成の方はこちら", new_users_person_path %>
-          </div-->
 
           <% end %>
         </div>
 
         <div class="col-9">
-          <h3 class="mb-5 text-center">通訳士の募集 一覧</h3>
+          <h3 class="text-center">通訳士の募集 一覧</h3>
+          <div class="text-right mr-1 mb-4">
+            <% if user_signed_in? %>
+            <div class="search_form">
+              <%= form_with url: search_path, local: true, method: :get do |f| %>
+                <%= f.text_field :word, placeholder: "タイトル、日時、場所を入れてください。"%>
+                <%= f.submit "検索", class: "btn-sm btn-primary" %>
+              <% end %>
+            </div>
+            <% end %>
+          </div>
+          
           <table class="table text-center">
             <thead>
               <tr>
-                <th>　　　タイトル　　　</th>
+                <th>　　　タイトル　　</th>
                 <th>　希望日時</th>
                 <th>集合場所　</th>
                 <th>投稿者　</th>
@@ -99,11 +101,10 @@
                     <% end %>
                   </td>
                 <% end %>
-
-
               </tr>
             </tbody>
-          <% end %>
+            <% end %>
+          
           </table>
         </div>
       </div>

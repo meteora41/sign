@@ -13,7 +13,9 @@ class Recruiting < ApplicationRecord
   validates :title, presence: true
   validates :datetime, presence: true, format: { with: /\A\d{2}-\d{2}/ } 
   
+  def self.looks(search, word)
+      @recruiting = Recruiting.where(["title LIKE(?) OR datetime LIKE(?) OR place LIKE(?)", "%#{word}%", "%#{word}%", "%#{word}%"])
+  end
   
 end
 
-#`validates :title, :datetime, :place, presence: true`
