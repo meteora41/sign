@@ -18,7 +18,7 @@
           </div>
 
           <div class= "m-3">
-            <div>コメント : <%= f.text_area :comment, placeholder: "例)同姓を希望/複雑な内容の通訳をお願いしたいのでスキルの高い方希望/初心者でも可　などご記入ください。" %></div>
+            <div>コメント : <%= f.text_area :comment, placeholder: "例)同性を希望/複雑な内容の通訳をお願いしたいのでスキルの高い方希望/初心者でも可　などご記入ください。" %></div>
           </div>
 
           <div class= "ml-3">
@@ -84,7 +84,7 @@
                   <%= recruiting.place %>
                 </td>
                 <td>
-                  <%= link_to recruiting.person.handle, "/users/recruitings/#{recruiting.id}/owner/#{recruiting.id}" %>
+                  <%= link_to recruiting.person.handle, "/users/recruitings/#{recruiting.person.id}/owner/#{recruiting.person.id}" %>
                 </td>
 
                 <% if user_signed_in? %>
@@ -106,7 +106,7 @@
             <% end %>
 
           </table>
-          <%= paginate @recruitings, theme: 'twitter-bootstrap-4' %>
+          <!--%= paginate @recruitings, theme: 'twitter-bootstrap-4' %-->
         </div>
       </div>
     </div>

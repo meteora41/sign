@@ -1,19 +1,61 @@
+  <div class="container">
+    <h3 class=" mt-5 mb-2 d-flex justify-content-center">マイページを作成してください。</h3>
+    <div class="ml-5 mb-2 d-flex justify-content-center" style= "color: red;">
+      <%= flash.now[:handle] %>
+    </div>
+
+    <%= form_with model: @person, url: users_persons_path do |f| %>
+
+    <div class= "mr-5 mb-5 d-flex justify-content-center">
+      <table width="40%" class="ml-3 mt-4">
+        <tr align="right">
+          <th style="font-size:20px; color:;" width="50%">
+            <h5>ハンドルネーム　:　</h5>
+          </th>
+          <td style="font-size:20px; color:red;" width= "50%">
+            <%= f.text_field :handle, placeholder: "" %>
+          </td>
+        </tr>
+
+        <tr align="right">
+          <th style="font-size:20px; color:;" width="50%">
+            <h5>性別　:　</h5>
+          </th>
+          <td style="font-size:20px; color:red;" width="50%">
+            <%= f.text_field :gender, placeholder: "男性、女性、その他" %>
+          </td>
+        </tr>
+
+        <tr align="right">
+          <th style="font-size:20px; color:;" width="50%">
+            <h5>年齢　:　</h5>
+          </th>
+          <td style="font-size:20px; color:red;" width="50%">
+            <%= f.text_field :age, placeholder: "OO歳" %>
+          </td>
+        </tr>
+
+        <tr align="right">
+          <th style="font-size:20px; color:;" width="50%">
+            <h5>連絡先　:　</h5>
+          </th>
+          <td style="font-size:20px; color:red;" width="50%">
+            <%= f.text_field :contact, placeholder: "" %>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class= " ml-5 mt-3 d-flex justify-content-center">
+      <%= f.submit "保存" %>
+    </div>
+    <% end %>
+    <div>
+      <h6 class=" mt-5 mb-4 ml-5 d-flex justify-content-center">ご登録ありがとうございます。こちらでマイページの作成をお願い致します。</h6>
+      <h6 class=" ml-5 d-flex justify-content-center">＊ハンドルネームは 空欄 のままにしないでください。後から編集できます。</h6>
+      <h6 class=" ml-4 d-flex justify-content-center"> ＊こちらの情報は誰でも閲覧可能なため、公開したくない場合、空欄、も</h6>
+      <h6 class=" mr-5 pr-5 d-flex justify-content-center">　しくは、「非公開」　と入力してください。　　　　　</h6>
 
 
-<%= form_with model: @person, url: users_persons_path do |f| %>
-
-  ハンドルネーム
-  <%= f.text_field :handle, placeholder: "" %>
-
-  性別
-  <%= f.text_field :gender , placeholder: "男性、女性、その他など"%>
-
-  年齢
-  <%= f.text_field :age, placeholder: "OO歳" %>
-
-  連絡先
-  <%= f.text_field :contact, placeholder: "" %>
-
-  <%= f.submit "保存" %>
-
-<% end %>
+    </div>
+  </div>

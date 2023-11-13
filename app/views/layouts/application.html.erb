@@ -14,28 +14,49 @@
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand p-3" href="/">手話通訳士派遣サイト</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          <% if current_page?(new_users_person_path) %>
+            <a class="navbar-brand p-3" href="/users/persons/new">手話通訳士派遣サイト</a>
+          <% else %>
+            <a class="navbar-brand p-3" href="/">手話通訳士派遣サイト</a>
+          <% end %>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          </button>
+            </button>
+          
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
+            
               <li class="nav-item">
-                <%= link_to "募集一覧", users_recruitings_path, class: 'nav-link text-dark' %>
+                <% if current_page?(new_users_person_path) %>
+                  <%= link_to "募集一覧", new_users_person_path, class: 'nav-link text-dark' %>
+                <% else %>
+                  <%= link_to "募集一覧", users_recruitings_path, class: 'nav-link text-dark' %>
+                <% end %>
               </li>
+              
               <li class="nav-item">
-                <!--% if @person == nil %-->
-                  <!--%= link_to "q", new_users_person_path %-->
-                <!--% else %-->  
+                <% if current_page?(new_users_person_path) %>
+                  <%= link_to "マイページ", new_users_person_path, class: 'nav-link text-dark' %>
+                <% else %>  
                   <%= link_to "マイページ", users_person_path(current_user.id), class: 'nav-link text-dark' %>
-                <!--% end %-->
+                <% end %>
               </li>
+              
               <li class="nav-item mr-4 ml-4">
-                <%= link_to "♥", favorites_users_person_path(current_user.id), method: :get, class: 'nav-link text-dark' %>
+                <% if current_page?(new_users_person_path) %>
+                  <%= link_to "♥", new_users_person_path, class: 'nav-link text-dark' %>
+                <% else %>
+                  <%= link_to "♥", favorites_users_person_path(current_user.id), method: :get, class: 'nav-link text-dark' %>
+                <% end %>
               </li>
+              
               <li class="nav-item">
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+                <% if current_page?(new_users_person_path) %>
+                  <%= link_to "ログアウト", new_users_person_path, class: 'nav-link text-dark' %>
+                <% else %>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+                <% end %>
               </li>
             
             <% else %>

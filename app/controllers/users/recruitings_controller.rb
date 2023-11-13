@@ -21,6 +21,7 @@ class Users::RecruitingsController < ApplicationController
 
   def show
     @recruiting = Recruiting.find(params[:id])
+    #@talks = Recruiting.page(params[:page]).per[2]
     @talk = Talk.new
   end
 

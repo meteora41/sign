@@ -3,18 +3,23 @@ class Users::PersonsController < ApplicationController
   def new
     @person = Person.new
   end
-  
+
   def index
     @person = Person.find(current_user.id)
-    
+
   end
 
 
   def create
       @person = Person.new(person_params)
       @person.user_id = current_user.id
-      @person.save
+      if @person.save
         redirect_to users_person_path(current_user.id)
+      else
+        flash.now[:handle] = "＊ハンドルネームを入力してください＊"
+        @person = Person.new
+        render :new
+      end
   end
 
 
@@ -26,7 +31,7 @@ class Users::PersonsController < ApplicationController
   def edit
     @person = Person.find(params[:id])
   end
-  
+
   def update
     person = Person.find(params[:id])
     if person.update(person_params)
@@ -38,17 +43,18 @@ class Users::PersonsController < ApplicationController
       render :edit
     end
   end
-  
+
   def favorites
     @person = Person.find(params[:id])
     favorites= Favorite.where(person_id: current_user.id).pluck(:recruiting_id)
     @favorite_posts = Recruiting.find(favorites)
   end
-  
+
   private
 
   def person_params
     params.require(:person).permit(:handle, :gender, :age, :contact)
   end
+
 
 end

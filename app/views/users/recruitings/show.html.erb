@@ -7,7 +7,7 @@
 
 
     <div class= "ml-5 pl-5 my-2 mt-4 d-flex justify-content-center">
-      <h4><%=link_to @recruiting.person.handle, "/users/recruitings/#{@recruiting.id}/owner/#{@recruiting.id}" %> さんの投稿</h4>
+      <h4><%=link_to @recruiting.person.handle, "/users/recruitings/#{@recruiting.person.id}/owner/#{@recruiting.person.id}" %> さんの投稿</h4>
     </div>
 
     <div class= "mt-4 mr-5 d-flex justify-content-center" style= "color: red;">タイトル</div>
@@ -58,7 +58,6 @@
               投稿者さんのコメント : <%= talk.conversation %>
             </div>
           <% end %>
-
         <% else %>
 
           <% if talk.person_id == current_user.id %>
@@ -75,12 +74,17 @@
 
         <% end %>
         </div>
+        
       <% end %>
 
       <%= form_with model: [@recruiting, @talk], url: users_recruiting_talks_path(@recruiting.id) do |f| %>
-        <div class= "ml-5"><%= f.text_field :conversation %></div>
-        <div class= "ml-5"><%= f.submit '送信' %></div>
+        <div class= "ml-5">
+          <%= f.text_field :conversation %>
+          <%= f.submit '送信' %>
+        </div>
+        
       <% end %>
+      <!--%= paginate @talks, theme: 'twitter-bootstrap-4' %-->
     <% end %>
   </div>
 
