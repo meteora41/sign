@@ -4,7 +4,7 @@ class Users::RecruitingsController < ApplicationController
 
   def index
     @recruiting = Recruiting.new
-    @recruitings = Recruiting.all
+    @recruitings = Recruiting.all.page(params[:page]).per(10)
   end
 
   def create
