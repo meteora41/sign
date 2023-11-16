@@ -1,4 +1,6 @@
 class Users::TalksController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
+
 
   def create
     @recruiting = Recruiting.find(params[:recruiting_id])

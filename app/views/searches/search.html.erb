@@ -5,13 +5,14 @@
             <% if user_signed_in? %>
             <div class="search_form">
               <%= form_with url: search_path, local: true, method: :get do |f| %>
-                <%= f.text_field :word, placeholder: "日時、場所を入れてください。"%>
+                <%= f.text_field :word, placeholder: "タイトル、日時、場所を入れてください。"%>
                 <%= f.submit "検索", class: "btn-sm btn-primary" %>
               <% end %>
             </div>
             <% end %>
           </div>
 
+          <!--検索結果一覧-->
           <table class="table text-center">
             <thead>
               <tr>
@@ -46,7 +47,7 @@
                     <% if recruiting.favorited_by?(current_user) %>
                       <%= link_to users_recruiting_favorites_path(recruiting), method: :delete do %>
                         ♥
-                    <% end %>
+                      <% end %>
 
                     <% else %>
                       <%= link_to users_recruiting_favorites_path(recruiting), method: :post do %>
@@ -56,11 +57,14 @@
                   </td>
                 <% end %>
 
-
               </tr>
             </tbody>
           <% end %>
           </table>
+          
+          <!--bootstrap-->
+          <div class= " mb-5 d-flex justify-content-center">
+            <%= paginate @recruitings, theme: 'twitter-bootstrap-4' %>
+          </div>
         </div>
-
     </div>

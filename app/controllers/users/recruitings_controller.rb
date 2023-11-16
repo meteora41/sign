@@ -14,15 +14,17 @@ class Users::RecruitingsController < ApplicationController
           flash[:success] = "投稿が完了しました。"
           redirect_to users_recruiting_path(@recruiting.id)
         else
-          @recruitings = Recruiting.all
+          @recruitings = Recruiting.all.page(params[:page]).per(10)
           render :index
         end
   end
 
   def show
     @recruiting = Recruiting.find(params[:id])
-    #@talks = Recruiting.page(params[:page]).per[2]
     @talk = Talk.new
+    @talks = @recruiting.talks.page(params[:page]).per(4)
+    
+    
   end
 
   def edit
@@ -50,6 +52,7 @@ class Users::RecruitingsController < ApplicationController
   def owner
     @recruiting = Recruiting.find(params[:id])
     @person = Person.find(params[:id])
+    @recruitings = @person.recruitings.page(params[:page]).per(5)
   end
 
 

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class Admins::SessionsController < Devise::SessionsController
+class Admin2s::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
+   def newwwwwwww
   #   super
-  # end
+   end
 
   # POST /resource/sign_in
   # def create

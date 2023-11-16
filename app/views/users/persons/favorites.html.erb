@@ -1,6 +1,10 @@
-  <div class="container">
-          <h3 class="mt-5 mb-5 text-center">お気に入り</h3>
-          <table class="table text-center">
+        <div class="container">
+          
+          <!--お気に入り一覧-->
+          <h3 class="mt-5 mb-5 text-center">
+            <span style ="background-color:#FFFF55; color:#EE0000	" class="font-weight-bold">　お気に入り　</span>
+          </h3>
+          <table class="table text-center" style ="background-color:#FFFFBB; ">
             <thead>
               <tr>
                 <th>　　　タイトル　　　</th>
@@ -44,9 +48,12 @@
                   </td>
                 <% end %>
 
-
               </tr>
             </tbody>
           <% end %>
           </table>
-  </div>
+          
+          <div class= "ml-5 mt-3 mb-3 d-flex justify-content-center">
+            <!--%= paginate @favorite_posts, theme: 'twitter-bootstrap-4' %-->
+          </div>
+        </div>

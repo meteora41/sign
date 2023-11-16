@@ -1,7 +1,12 @@
 
   <div class="container">
-    <h3 class="ml-5 mt-5 mb-5 d-flex justify-content-center"> <%= @recruiting.person.handle %> さんのマイページ詳細</h3>
     
+    <!--投稿者のマイページ詳細-->
+    <h3 class="ml-3 mt-5 mb-5 d-flex justify-content-center">
+      <span style ="background-color:#00CC33; color:white" class="font-weight-bold">
+        　<%= @recruiting.person.handle %> さんのマイページ詳細　
+      </span>
+    </h3>
     <div class= "mr-5 d-flex justify-content-center">
     <table width="40%">
       <tr align="right">
@@ -42,8 +47,11 @@
     </table>
     </div>
 
-    <h4 class="ml-5 mt-5 mb-5 ">投稿 一覧</h4>
-    <table class="table text-center">
+    <!--投稿者の投稿一覧-->
+    <h4 class="ml-5 mt-5 mb-5 ">
+      <span style ="background-color:#99CCFF; color:white" class="font-weight-bold">　投稿 一覧　</span>
+    </h4>
+    <table class="table text-center" style ="background-color:#D7EEFF; ">
       <thead>
         <tr>
           <th>　　　タイトル　　　</th>
@@ -51,16 +59,18 @@
           <th>集合場所　</th>
         </tr>
       </thead>
-            
+      
       <tbody>
-      <% @person.recruitings.each do |recruiting| %>
+      <% @recruitings.each do |recruiting| %>
         <tr>
           <td>
             <%= link_to recruiting.title, "/users/recruitings/#{recruiting.id}" %>
           </td>
+          
           <td>
             <%= recruiting.datetime %>
           </td>
+          
           <td>
             <%= recruiting.place %>
           </td>
@@ -68,4 +78,8 @@
       </tbody>
     <% end %>
     </table>
+    
+    <div class= "ml-5 mt-3 mb-3 d-flex justify-content-center">
+      <%= paginate @recruitings, theme: 'twitter-bootstrap-4' %>
+    </div>
   </div>

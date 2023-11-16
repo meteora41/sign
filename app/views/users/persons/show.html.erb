@@ -3,8 +3,11 @@
     <div class="ml-5 mt-4 " style= "color: lightgreen;">
       <%= flash[:notice] %>
     </div>
-
-    <h3 class="ml-5 mt-5 mb-5 d-flex justify-content-center"> <%= @person.user.name %> さんのマイページ</h3>
+    
+    <!--マイページ詳細-->
+    <h3 class="ml-5 mt-5 mb-5 d-flex justify-content-center">
+      <span style ="background-color:#00CC33; color:white" class="font-weight-bold">　<%= @person.user.name %> さんのマイページ　</span>
+    </h3>
 
     <div class= "mr-5 d-flex justify-content-center">
     <table width="40%">
@@ -46,14 +49,17 @@
 
     </table>
     </div>
-    <div class= " ml-5 mt-4 pl-5 d-flex justify-content-center">
-      <%= button_to "編集", edit_users_person_path, class: "btn btn-success mr-5", method: :get %>
-    </div>
+    <% if @person.user_id == current_user.id %>
+      <div class= " ml-5 mt-4 pl-5 d-flex justify-content-center">
+        <%= button_to "編集", edit_users_person_path, class: "btn btn-success mr-5", method: :get %>
+      </div>
+    <% end %>
 
-
-
-    <h4 class="ml-5 mt-4 mb-5 pl-5">投稿 一覧</h4>
-    <table class="table text-center">
+    <!--自分の募集投稿一覧-->
+    <h4 class="ml-5 mt-4 mb-5 pl-5">
+      <span style ="background-color:#99CCFF; color:white" class="font-weight-bold">　投稿 一覧　</span>
+    </h4>
+    <table class="table text-center" style ="background-color:#D7EEFF; ">
       <thead>
         <tr>
           <th>　　　タイトル　　　</th>
@@ -63,7 +69,7 @@
       </thead>
 
       <tbody>
-      <% @person.recruitings.each do |recruiting| %>
+      <% @recruitings.each do |recruiting| %>
         <tr>
           <td>
             <%= link_to recruiting.title, "/users/recruitings/#{recruiting.id}" %>
@@ -76,7 +82,10 @@
           </td>
         </tr>
       </tbody>
-    <%end %>
+      <%end %>
     </table>
-
+    
+    <div class= "ml-5 mt-3 mb-3 d-flex justify-content-center">
+      <%= paginate @recruitings, theme: 'twitter-bootstrap-4' %>
+    </div>
   </div>

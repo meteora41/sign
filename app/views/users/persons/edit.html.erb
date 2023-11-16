@@ -1,15 +1,18 @@
 
   <div class="container">
-    <h3 class="ml-5 mt-5 mb-4 d-flex justify-content-center"> <%= @person.user.name %> さんのマイページ編集</h3>
+    <h3 class="ml-5 mt-5 mb-4 d-flex justify-content-center">
+      <span style ="background-color:#00CC33; color:white" class="font-weight-bold">　<%= @person.user.name %> さんのマイページ編集　</span>
+    </h3>
 
     <div class="ml-5 mb-2 d-flex justify-content-center" style= "color: red;">
       <%= flash[:alert] %>
     </div>
 
+    <!--編集情報-->
     <%= form_with model: @person, url: users_person_path do |f| %>
-
     <div class= "mr-5 mb-5 d-flex justify-content-center">
       <table width="40%" class="ml-3 mt-4">
+        
         <tr align="right">
           <th style="font-size:20px; color:;" width="50%">
             ハンドルネーム :
@@ -47,9 +50,11 @@
         </tr>
       </table>
     </div>
-  
-    <div class= " ml-5 mt-4 d-flex justify-content-center">
-      <%= f.submit "保存" %>
-    </div>
+    
+      <% if @person.user_id == current_user.id %>
+        <div class= " ml-5 mt-4 d-flex justify-content-center">
+          <%= f.submit "保存", class: "btn btn-secondary" %>
+        </div>
+      <% end %>
     <% end %>
   </div>

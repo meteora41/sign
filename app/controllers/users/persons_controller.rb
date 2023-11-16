@@ -1,5 +1,6 @@
 class Users::PersonsController < ApplicationController
-
+  before_action :authenticate_user!, only: [:new, :index, :create, :show, :edit, :update, :favorites ]
+  
   def new
     @person = Person.new
   end
@@ -25,6 +26,7 @@ class Users::PersonsController < ApplicationController
 
   def show
     @person = Person.find(params[:id])
+    @recruitings = @person.recruitings.page(params[:page]).per(5)
   end
 
 
@@ -46,8 +48,9 @@ class Users::PersonsController < ApplicationController
 
   def favorites
     @person = Person.find(params[:id])
-    favorites= Favorite.where(person_id: current_user.id).pluck(:recruiting_id)
+    favorites = Favorite.where(person_id: current_user.id).pluck(:recruiting_id)
     @favorite_posts = Recruiting.find(favorites)
+    
   end
 
   private
