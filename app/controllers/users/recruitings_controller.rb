@@ -47,11 +47,7 @@ class Users::RecruitingsController < ApplicationController
   def destroy
     recruiting = Recruiting.find(params[:id])
     recruiting.destroy
-    if admin_signed_in?
-      redirect_to search_path(params[:search], params[:word])
-    else
-      redirect_to users_recruitings_path
-    end
+    redirect_to users_recruitings_path
   end
 
   def owner
