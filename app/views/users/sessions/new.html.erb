@@ -1,6 +1,11 @@
 
   <div class="container">
     <div class="mx-auto" style="width: 400px;">
+      
+    <% if admin_signed_in? %>
+      <h2 class="mt-5 pt-5 mb-5 ml-5 ">管理者をログアウトしてからご利用ください。</h2>
+      
+    <% else %>
       <h2 class="mt-5 pt-5 mb-5 ml-5 ">ログイン画面へようこそ</h2>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -27,5 +32,6 @@
         <div class="field ml-5 pl-5 pt-5">
           　<%= link_to "管理者はこちらから", new_admin_session_path %>
         </div>
+    <% end %>
     </div>
   </div>
