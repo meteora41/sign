@@ -4,7 +4,7 @@
     <!--投稿者のマイページ詳細-->
     <h3 class="ml-3 mt-5 mb-5 d-flex justify-content-center">
       <span style ="background-color:#00CC33; color:white" class="font-weight-bold">
-        　<%= @recruiting.person.handle %> さんのマイページ詳細　
+        　<%= @person.handle %> さんのマイページ詳細　
       </span>
     </h3>
     <div class= "mr-5 d-flex justify-content-center">
@@ -14,7 +14,7 @@
           ハンドルネーム : 
         </th>
         <td style="font-size:20px; color:red;" width= "50%">
-          <%= @recruiting.person.handle %></diV>
+          <%= @person.handle %></diV>
         </td>
       </tr>
       
@@ -23,7 +23,7 @@
           性別 : 
         </th>
         <td style="font-size:20px; color:red;" width="50%">
-          <%= @recruiting.person.gender %>
+          <%= @person.gender %>
         </td>
       </tr>
       
@@ -32,7 +32,7 @@
           年齢 :
         </th>
         <td style="font-size:20px; color:red;" width="50%">
-          <%= @recruiting.person.age %>
+          <%= @person.age %>
         </td>
       </tr>
       
@@ -41,7 +41,7 @@
           連絡先 : 
         </th>
         <td style="font-size:20px; color:red;" width="50%">
-          <%= @recruiting.person.contact %>
+          <%= @person.contact %>
         </td>
       </tr>
     </table>

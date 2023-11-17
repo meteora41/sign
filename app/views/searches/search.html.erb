@@ -2,18 +2,18 @@
     <div class="container">
           <h3 class="mt-5 text-center">検索結果　"<%= @word %>"</h3>
           <div class="text-right mr-1 mb-4">
-            <% if user_signed_in? %>
+            <!--% if user_signed_in? %-->
             <div class="search_form">
               <%= form_with url: search_path, local: true, method: :get do |f| %>
                 <%= f.text_field :word, placeholder: "タイトル、日時、場所を入れてください。"%>
                 <%= f.submit "検索", class: "btn-sm btn-primary" %>
               <% end %>
             </div>
-            <% end %>
+            <!--% end %-->
           </div>
 
           <!--検索結果一覧-->
-          <table class="table text-center">
+          <table class="table text-center" style ="background-color:#D7EEFF; ">
             <thead>
               <tr>
                 <th>　　　タイトル　　　</th>
@@ -22,6 +22,9 @@
                 <th>投稿者　</th>
                 <% if user_signed_in? %>
                   <th>お気に入り</th>
+                <% end %>
+                <% if admin_signed_in? %>
+                  <th>管理</th>
                 <% end %>
               </tr>
             </thead>
@@ -39,7 +42,7 @@
                   <%= recruiting.place %>
                 </td>
                 <td>
-                  <%= link_to recruiting.person.handle, "/users/recruitings/#{recruiting.id}/owner/#{recruiting.id}" %>
+                  <%= link_to recruiting.person.handle, "/users/recruitings/#{recruiting.id}/owner/#{recruiting.person.id}" %>
                 </td>
 
                 <% if user_signed_in? %>
@@ -56,7 +59,12 @@
                     <% end %>
                   </td>
                 <% end %>
-
+                
+                <% if admin_signed_in? %>
+                  <td>
+                    <%= button_to "削除", users_recruiting_path(recruiting.id), class: "btn btn-danger ", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                  </td>
+                <% end %>
               </tr>
             </tbody>
           <% end %>

@@ -33,7 +33,8 @@
             <%= button_to "削除", users_recruiting_path(@recruiting.id), class: "btn btn-danger ml-5", method: :delete, "data-confirm" => "本当に削除しますか？" %>
           </div>
         <% end %>
-        
+    <% end %>
+    
           <div class= "mt-4 bg-warning text-dark">
             <h5 class= "font-weight-bold">＊注意点＊</h5>
             <h6>
@@ -44,53 +45,64 @@
             </h6>
             <h6>　</h6>
           </div>
-
+   
       <!--コメント一覧-->
       <div class= "mb-2 mt-2 ml-5 ">ーコメント欄ー</div>
       <% @talks.each do |talk| %>
         <div class= "ml-5 mb-2 ">
-        <% if talk.person_id == @recruiting.person_id %>
+          
+        <% if admin_signed_in? %>
+          <div style= "color: blue;">
+            <%=link_to talk.person.handle,  "/users/recruitings/#{talk.person_id}/owner/#{talk.person_id}" %>さんのコメント : <%= talk.conversation %>
+            <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+          </div>
+        <% end %>  
+        
+        <% if user_signed_in? %>  
+          <% if talk.person_id == @recruiting.person_id %>
+            <% if talk.person_id == current_user.id %>
+            <!--投稿主とコメント者が同じ、かつ、コメント者がログインユーザーの場合-->
+              <div style= "color: green;">自分のコメント : <%= talk.conversation %>
+              <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete, "data-confirm" => "本当に削除しますか？" %></div>
 
-          <% if talk.person_id == current_user.id %>
-          <!--投稿主とコメント者が同じ、かつ、コメント者がログインユーザーの場合-->
-            <div style= "color: green;">自分のコメント : <%= talk.conversation %>
-            <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete %></div>
-
+            <% else %>
+            <!--投稿主とコメント者が同じ、かつ、コメント者がログインユーザーと別の場合-->
+              <div style= "color: red;">
+                投稿者さんのコメント : <%= talk.conversation %>
+              </div>
+            <% end %>
+          
           <% else %>
-          <!--投稿主とコメント者が同じ、かつ、コメント者がログインユーザーと別の場合-->
-            <div style= "color: red;">
-              投稿者さんのコメント : <%= talk.conversation %>
-            </div>
+            <% if talk.person_id == current_user.id %>
+            <!--投稿主とコメント者が別、かつ、コメント者がログインユーザーの場合-->
+              <div style= "color: green;">自分のコメント : <%= talk.conversation %>
+              <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete, "data-confirm" => "本当に削除しますか？" %></div>
+
+            <% else %>
+            <!--投稿主とコメント者が別、かつ、コメント者がログインユーザーと別の場合-->
+              <div style= "color: blue;">
+                <%=link_to talk.person.handle,  "/users/recruitings/#{talk.person_id}/owner/#{talk.person_id}" %>さんのコメント : <%= talk.conversation %>
+              </div>
+            <% end %>
           <% end %>
-        <% else %>
-
-          <% if talk.person_id == current_user.id %>
-          <!--投稿主とコメント者が別、かつ、コメント者がログインユーザーの場合-->
-            <div style= "color: green;">自分のコメント : <%= talk.conversation %>
-            <%= link_to "削除", users_recruiting_talk_path(talk.recruiting, talk), method: :delete %></div>
-
-          <% else %>
-          <!--投稿主とコメント者が別、かつ、コメント者がログインユーザーと別の場合-->
-            <div style= "color: blue;">
-              <%=link_to talk.person.handle,  "/users/recruitings/#{talk.person_id}/owner/#{talk.person_id}" %>さんのコメント : <%= talk.conversation %>
-            </div>
-          <% end %>
-
         <% end %>
         </div>
       <% end %>
 
       <!--コメント作成-->
-      <%= form_with model: [@recruiting, @talk], url: users_recruiting_talks_path(@recruiting.id) do |f| %>
-        <div class= "mt-2 ml-5 pl-2 d-flex justify-content-center">
-          <%= f.text_field :conversation %>
-          <%= f.submit '送信' %>
-        </div>
+      <% if user_signed_in? %>
+        <%= form_with model: [@recruiting, @talk], url: users_recruiting_talks_path(@recruiting.id) do |f| %>
+          <div class= "mt-2 ml-5 pl-2 d-flex justify-content-center">
+            <%= f.text_field :conversation %>
+            <%= f.submit '送信' %>
+          </div>
+        <% end %>
       <% end %>
+        
       
       <div class= "ml-5 mt-3 mb-3 d-flex justify-content-center">
         <%= paginate @talks, theme: 'twitter-bootstrap-4' %>
       </div>
-    <% end %>
+    
   </div>
 

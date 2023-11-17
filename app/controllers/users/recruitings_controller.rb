@@ -1,6 +1,7 @@
 class Users::RecruitingsController < ApplicationController
 
-  before_action :authenticate_user!, only: [ :edit, :update, :destroy, :create, :owner]
+  before_action :authenticate_user!, only: [ :edit, :update, :create, :owner]
+  #before_action :authenticate_admin!, only: [ :destroy]
 
   def index
     @recruiting = Recruiting.new
@@ -46,11 +47,15 @@ class Users::RecruitingsController < ApplicationController
   def destroy
     recruiting = Recruiting.find(params[:id])
     recruiting.destroy
-    redirect_to users_recruitings_path
+    if admin_signed_in?
+      redirect_to search_path(params[:search], params[:word])
+    else
+      redirect_to users_recruitings_path
+    end
   end
 
   def owner
-    @recruiting = Recruiting.find(params[:id])
+    #@recruiting = Recruiting.find(params[:id])
     @person = Person.find(params[:id])
     @recruitings = @person.recruitings.page(params[:page]).per(5)
   end

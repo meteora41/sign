@@ -30,7 +30,7 @@
                   <%= recruiting.place %>
                 </td>
                 <td>
-                  <%= link_to recruiting.person.handle, "/users/recruitings/#{recruiting.id}/owner/#{recruiting.id}" %>
+                  <%= link_to recruiting.person.handle, "/users/recruitings/#{recruiting.id}/owner/#{recruiting.person.id}" %>
                 </td>
 
                 <% if user_signed_in? %>

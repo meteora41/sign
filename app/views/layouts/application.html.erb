@@ -25,50 +25,68 @@
           
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-            
-              <li class="nav-item">
-                <% if current_page?(new_users_person_path) %>
-                  <%= link_to "募集一覧", new_users_person_path, class: 'nav-link text-dark' %>
-                <% else %>
-                  <%= link_to "募集一覧", users_recruitings_path, class: 'nav-link text-dark' %>
-                <% end %>
-              </li>
               
-              <li class="nav-item">
-                <% if current_page?(new_users_person_path) %>
-                  <%= link_to "マイページ", new_users_person_path, class: 'nav-link text-dark' %>
-                <% else %>  
-                  <%= link_to "マイページ", users_person_path(current_user.id), class: 'nav-link text-dark' %>
-                <% end %>
-              </li>
               
-              <li class="nav-item mr-4 ml-4">
-                <% if current_page?(new_users_person_path) %>
-                  <%= link_to "♥", new_users_person_path, class: 'nav-link text-dark' %>
-                <% else %>
-                  <%= link_to "♥", favorites_users_person_path(current_user.id), method: :get, class: 'nav-link text-dark' %>
-                <% end %>
-              </li>
               
-              <li class="nav-item">
-                <% if current_page?(new_users_person_path) %>
-                  <%= link_to "ログアウト", new_users_person_path, class: 'nav-link text-dark' %>
-                <% else %>
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-                <% end %>
-              </li>
-            
-            <% else %>
-              <li class="nav-item">
+            <% if admin_signed_in? %>
+              <li>
                 <%= link_to "募集一覧", users_recruitings_path, class: 'nav-link text-dark' %>
               </li>
-              <li class="nav-item">
-                <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+              <li>
+                <%= link_to "ログアウト", destroy_admin_session_path, class: 'nav-link text-dark', method: :delete %>
               </li>
-              <li class="nav-item">
-                <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
-              </li>
+            <% else %>
+
+              
+              
+              
+              
+              
+              <% if user_signed_in? %>
+            
+                <li class="nav-item">
+                  <% if current_page?(new_users_person_path) %>
+                    <%= link_to "募集一覧", new_users_person_path, class: 'nav-link text-dark' %>
+                  <% else %>
+                    <%= link_to "募集一覧", users_recruitings_path, class: 'nav-link text-dark' %>
+                  <% end %>
+                </li>
+              
+                <li class="nav-item">
+                  <% if current_page?(new_users_person_path) %>
+                    <%= link_to "マイページ", new_users_person_path, class: 'nav-link text-dark' %>
+                  <% else %>  
+                    <%= link_to "マイページ", users_person_path(current_user.id), class: 'nav-link text-dark' %>
+                  <% end %>
+                </li>
+              
+                <li class="nav-item mr-4 ml-4">
+                  <% if current_page?(new_users_person_path) %>
+                    <%= link_to "♥", new_users_person_path, class: 'nav-link text-dark' %>
+                  <% else %>
+                    <%= link_to "♥", favorites_users_person_path(current_user.id), method: :get, class: 'nav-link text-dark' %>
+                  <% end %>
+                </li>
+              
+                <li class="nav-item">
+                  <% if current_page?(new_users_person_path) %>
+                    <%= link_to "ログアウト", new_users_person_path, class: 'nav-link text-dark' %>
+                  <% else %>
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+                  <% end %>
+                </li>
+            
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "募集一覧", users_recruitings_path, class: 'nav-link text-dark' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+                </li>
+              <% end %>
             <% end %>
             </ul>
           </div>
