@@ -88,7 +88,10 @@
         <% end %>
         </div>
       <% end %>
-
+      
+      <div class= "mt-2 ml-5 pl-2 d-flex justify-content-center" style= "color: red;">
+        <%= flash[:notice] %>
+      </div>
       <!--コメント作成-->
       <% if user_signed_in? %>
         <%= form_with model: [@recruiting, @talk], url: users_recruiting_talks_path(@recruiting.id) do |f| %>

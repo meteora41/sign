@@ -8,8 +8,12 @@ class Users::TalksController < ApplicationController
     @talk.person_id = current_user.id
 
     @talk.recruiting_id = @recruiting.id
-    @talk.save
-    redirect_to users_recruiting_path(@recruiting)
+    if @talk.save
+      redirect_to users_recruiting_path(@recruiting)
+    else
+      flash[:notice] = "＊ コメントを入力してください ＊"
+      redirect_to users_recruiting_path(@recruiting)
+    end
   end
 
   def destroy

@@ -2,7 +2,7 @@ class CreateTalks < ActiveRecord::Migration[6.1]
   def change
     create_table :talks do |t|
       
-      t.string :conversation
+      t.string :conversation, null: false
       t.integer :recruiting_id
       t.integer :person_id
 
